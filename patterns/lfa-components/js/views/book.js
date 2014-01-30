@@ -1,5 +1,6 @@
 define([
   'jquery',
+  'lettering',
   'underscore',
   'backbone',
   'store',
@@ -10,7 +11,7 @@ define([
   'views/rightbar',
   'views/chapter',
   'views/menu'
-], function($, _, Backbone, Store, Modernizr, FastClick, LeftbarView, RightbarView, ChapterView, MenuView) {
+], function($, Lettering, _, Backbone, Store, Modernizr, FastClick, LeftbarView, RightbarView, ChapterView, MenuView) {
   'use strict';
   
   var Setting = Backbone.Model.extend({
@@ -61,6 +62,22 @@ define([
         self.closeSidebars();
       });
       
+      this.$('section.container').hammer().on('hold', function(event) {
+        $(event.target).parent('section').children().lettering('words');
+        console.log(event);
+      });
+      
+      if (!this.html.hasClass('appleios')) {
+        // If we're not on iOS, add events to open the sidebars via swiping left/right.
+        // iOS doesn't get these because iOS 7 Safari uses them for back/forward.
+        this.$('section.container').hammer().on('dragright', function() {
+          self.leftbar.open();
+        });
+        this.$('section.container').hammer().on('dragleft', function() {
+          self.rightbar.open();
+        });
+      }
+
       this.leftbar = new LeftbarView({
         el: this.$('#leftbar'),
         parent: this,
