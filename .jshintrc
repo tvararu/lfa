@@ -104,6 +104,5 @@ More info:
   "maxerr"       : 50,
   "predef"       : [],
   "quotmark"     : true, // 'single'|'double'|true
-  "maxparams"    : 10,   // int max params per function
   "maxcomplexity": 10    // int max cyclomatic complexity per function
 }
