@@ -63,7 +63,7 @@ define([
       this.$('section.container').on('click', function() {
         self.closeSidebars();
       });
-      
+
       this.$('section.container').hammer().on('hold', function(event) {
         var section = $(event.target).closest('section');
         // var textbook = $('#textbook');
@@ -101,7 +101,7 @@ define([
           $(this).css({'top': (window.initialY + tapPos.deltaY) + 'px', 'left': (window.initialX + tapPos.deltaX) + 'px'});
         });
       });
-      
+
       this.leftbar = new LeftbarView({
         el: this.$('#leftbar'),
         parent: this,
