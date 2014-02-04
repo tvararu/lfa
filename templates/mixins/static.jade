@@ -1,11 +1,21 @@
+//- (!self) is hacky. `self` will only appear in method definitions when we're clientside.
+//- As such, anything with (!self) will only get executed during LFA precompiling.
 mixin article(title, subtitle)
-  - if (!self) { locals.title = title; locals.subtitle = subtitle; }
-  article
+  - if (!self) {
+  -   locals.title = title;
+  -   locals.subtitle = subtitle;
+  - }
+  article(data-title=title)
     block
 
 mixin section(title)
-  - if (!self) { locals.sections = locals.sections || []; locals.sections.push(title); }
-  section
+  - if (!self) {
+  -   locals.sections = locals.sections || [];
+  -   // generate a md5-ish hash from the text contents of the block
+  -   var hash = (function() { buf = []; block(); return buf.join().hashCode(); })();
+  -   locals.sections.push({ title: title, hash: hash });
+  - }
+  section(data-title=title)
     block
 
 mixin img(path)
