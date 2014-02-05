@@ -1,4 +1,4 @@
-//- (!self) is hacky. `self` will only appear in method definitions when we're clientside.
+//- `self` will only appear in method definitions when we're clientside.
 //- As such, anything with (!self) will only get executed during LFA precompiling.
 mixin article(title, subtitle)
   - if (!self) {
