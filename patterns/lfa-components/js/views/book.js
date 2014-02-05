@@ -6,12 +6,13 @@ define([
   'store',
   'modernizr',
   'fastclick',
+  'searchjson',
   
   'views/leftbar',
   'views/rightbar',
   'views/chapter',
   'views/menu'
-], function($, Lettering, _, Backbone, Store, Modernizr, FastClick, LeftbarView, RightbarView, ChapterView, MenuView) {
+], function($, Lettering, _, Backbone, Store, Modernizr, FastClick, SearchJSON, LeftbarView, RightbarView, ChapterView, MenuView) {
   'use strict';
   
   var Setting = Backbone.Model.extend({
@@ -70,7 +71,7 @@ define([
         var textbook = $('#textbook');
         
         var key = textbook.data('url') + '/' + section.index();
-        console.log(key);
+        console.log(SearchJSON.hashcodeIndex[key]);
       });
       
       if (!this.html.hasClass('appleios')) {
