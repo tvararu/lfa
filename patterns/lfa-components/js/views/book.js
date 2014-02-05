@@ -71,6 +71,7 @@ define([
         // console.log(SearchJSON.hashcodeIndex[key]);
         
         $(event.target).parent('section').children().lettering('words');
+
         var tapPos = event.gesture.center;
         // get the span that was generated under the gesture
         var span = $(document.elementFromPoint(tapPos.pageX, tapPos.pageY));
