@@ -47,7 +47,8 @@ define([
     html: $('html'),
     
     initialize: function() {
-      // Initialize FastClick. This removes the .3s delay in mobile webkit when clicking on anything.
+      // Initialize FastClick. This removes the .3s delay in mobile webkit when clicking 
+      // on anything.
       FastClick.attach(document.body);
       
       if (Settings.findWhere({ title: 'Animations' }).get('value')) {
@@ -78,6 +79,11 @@ define([
       this.$('section.container').hammer().on('hold', function(event) {
         $(event.target).parent('section').children().lettering('words');
         console.log(event);
+        var section = $(event.target).closest('section');
+        var textbook = $('#textbook');
+        
+        var key = textbook.data('url') + '/' + section.index();
+        console.log(key);
       });
       
       if (!this.html.hasClass('appleios')) {

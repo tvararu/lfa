@@ -20,6 +20,9 @@ define([
       
       this.$el.html(Templates[chapter]);
       
+      // Add the current url to the #textbook container data attributes.
+      this.$el.data('url', chapter);
+      
       // After the content loads, juice it up with some javascript.
       
       // Enable responsive tables.
