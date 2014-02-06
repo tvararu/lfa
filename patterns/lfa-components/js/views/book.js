@@ -74,17 +74,6 @@ define([
         console.log(SearchJSON.hashcodeIndex[key]);
       });
       
-      if (!this.html.hasClass('appleios')) {
-        // If we're not on iOS, add events to open the sidebars via swiping left/right.
-        // iOS doesn't get these because iOS 7 Safari uses them for back/forward.
-        this.$('section.container').hammer().on('dragright', function() {
-          self.leftbar.open();
-        });
-        this.$('section.container').hammer().on('dragleft', function() {
-          self.rightbar.open();
-        });
-      }
-
       this.leftbar = new LeftbarView({
         el: this.$('#leftbar'),
         parent: this,
