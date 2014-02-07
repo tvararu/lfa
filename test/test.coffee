@@ -112,12 +112,15 @@ describe 'compiler', ->
       compiler.on 'finished', -> done()
       compiler.finish()
   
-  describe.skip 'performance', ->
+  describe 'performance', ->
     it 'should compile at a reasonable pace', (done) ->
       run "cd \"#{basic_root}\"; time ../../bin/lfa compile --no-compress", (error, stdout, stderr) ->
         wallTime = parseFloat(stderr.split('m').slice(0, 2)[1].split('s')[0])
         wallTime.should.be.below(reasonable_compile_time)
+<<<<<<< HEAD
         console.log wallTime * 1000 + 'ms'
+=======
+>>>>>>> Update performance test
         done()
       
 
