@@ -65,13 +65,41 @@ define([
       });
       
       this.$('section.container').hammer().on('hold', function(event) {
-        $(event.target).parent('section').children().lettering('words');
-        console.log(event);
         var section = $(event.target).closest('section');
-        var textbook = $('#textbook');
+        // var textbook = $('#textbook');
+        // var key = textbook.data('url') + '/' + section.index();
+        // console.log(SearchJSON.hashcodeIndex[key]);
         
-        var key = textbook.data('url') + '/' + section.index();
-        console.log(SearchJSON.hashcodeIndex[key]);
+        $(event.target).parent('section').children().lettering('words');
+        var tapPos = event.gesture.center;
+        // get the span that was generated under the gesture
+        var span = $(document.elementFromPoint(tapPos.pageX, tapPos.pageY));
+        // get the position of the span that generated under the tap gesture
+        var spanPos = span.position();
+        
+        // position the selection begin cursor before the span
+        section.prepend(
+          $('<span class="begin cursor"></span>')
+            .css({'top': spanPos.top + 'px', 'left': (spanPos.left - 7) + 'px'})
+        );
+        
+        // position the selection end cursor after the span
+        section.append(
+          $('<span class="end cursor"></span>')
+            .css({'top': spanPos.top + 'px', 'left': (spanPos.left + span.width()) + 'px'})
+        );
+        
+        $('.cursor').hammer().on('dragstart', function() {
+          var initPos = $(this).position();
+          window.initialX = initPos.left;
+          window.initialY = initPos.top;
+        });
+        
+        $('.cursor').hammer().on('drag', function(event) {
+          console.log(event);
+          var tapPos = event.gesture;
+          $(this).css({'top': (window.initialY + tapPos.deltaY) + 'px', 'left': (window.initialX + tapPos.deltaX) + 'px'});
+        });
       });
       
       this.leftbar = new LeftbarView({
