@@ -9,7 +9,7 @@ run = require('child_process').exec
 root = __dirname
 basic_root = path.join root, 'basic'
 output_folder = '_build'
-reasonable_compile_time = 1.0
+reasonable_compile_time = 3.0
 
 files_exist = (test_path, files) ->
   for file in files
@@ -116,12 +116,11 @@ describe 'compiler', ->
       compiler.on 'finished', -> done()
       compiler.finish()
   
-  describe.skip 'performance', ->
+  describe 'performance', ->
     it 'should compile at a reasonable pace', (done) ->
       run "cd \"#{basic_root}\"; time ../../bin/lfa compile --no-compress", (error, stdout, stderr) ->
         wallTime = parseFloat(stderr.split('m').slice(0, 2)[1].split('s')[0])
-        # wallTime.should.be.below(reasonable_compile_time)
-        console.log wallTime * 1000 + 'ms'
+        wallTime.should.be.below(reasonable_compile_time)
         done()
       
 
