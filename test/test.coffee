@@ -9,7 +9,11 @@ run = require('child_process').exec
 root = __dirname
 basic_root = path.join root, 'basic'
 output_folder = '_build'
+<<<<<<< HEAD
 reasonable_compile_time = 5.0
+=======
+reasonable_compile_time = 3.0
+>>>>>>> f70a16d4faeb7f327917c33f78a4b69f265f533e
 
 files_exist = (test_path, files) ->
   for file in files
