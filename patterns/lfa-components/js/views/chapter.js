@@ -19,6 +19,7 @@ define([
       this.$el.html(Templates[chapter]);
       
       window.App.book.trigger('render');
+      
       // Add the current url to the #textbook container data attributes.
       this.$el.data('url', chapter);
       
